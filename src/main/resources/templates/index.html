@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/_fragments::common_head(~{::title})">
+    <title>首页</title>
+</head>
+<body>
+    <!--导航栏-->
+    <nav th:replace="common/_fragments::common_nav('首页')"></nav>
+
+    <!--中间内容-->
+    <div class="m-container m-padded-tb-big">
+        <div class="ui container">
+            <div class="ui stackable grid">
+                <!---------左边博客列表---------->
+                <div class="eleven wide column">
+                    <!------------header---------->
+                    <div class="ui top attached segment">
+                        <div class="ui middle aligned two column grid">
+                            <div class="column">
+                                <h2 class="ui teal header">博客</h2>
+                            </div>
+                            <div class="right aligned column">
+                                共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${pageInfo.total}">14</h2>篇
+                            </div>
+                        </div>
+                    </div>
+                    <!------------content---------->
+                    <div class="ui attached segment">
+                        <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${pageInfo.list}">
+                            <div class="ui middle aligned mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗?</a></h3>
+                                    <p class="m-text" th:text="|${blog.description}......|">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来没有想过，只是大家都那么做而已。。。</p>
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui mini horizontal link list">
+                                                <div class="item">
+                                                    <img src="https://picsum.photos/id/1005/100/100" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
+                                                    <div class="content"><a href="#" class="header"><span th:text="${blog.user.nickname}">PigwantAcat</span></a></div>
+                                                </div>
+                                                <div class="item"><i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2021-3-20</span></div>
+                                                <div class="item"><i class="eye icon"></i><span th:text="${blog.views}">123</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="right aligned five wide column">
+                                            <a href="#" th:href="@{/types/{id}(id=${blog.type.id})}" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">认知升级</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="five wide column">
+                                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                        <img src="https://picsum.photos/id/1005/800/450" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/*--> <!--静态页面访问时可以显示此注释里面的内容-->
+                        <div class="ui padded vertical segment m-padded-tb-large">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
+                                    <p class="m-text">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来没有想过，只是大家都那么做而已。。。</p>
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui mini horizontal link list">
+                                                <div class="item">
+                                                    <img src="https://picsum.photos/id/1005/100/100" alt="" class="ui avatar image">
+                                                    <div class="content"><a href="#" class="header"><span>PigwantAcat</span></a></div>
+                                                </div>
+                                                <div class="item"><i class="calendar icon"></i><span>2021-3-20</span></div>
+                                                <div class="item"><i class="eye icon"></i><span>123</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="right aligned five wide column">
+                                            <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="five wide column">
+                                    <a href="#" target="_blank">
+                                        <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--*/-->
+                    </div>
+
+
+                    <!------------footer---------->
+                    <div class="ui bottom attached segment" >
+                        <div class="ui middle aligned two column grid">
+                            <div class="column">
+                                <div class="ui floated pagination menu">
+                                    <p class="ui blue info message">当前第<span th:text="${pageInfo.pageNum}"></span>页，总<span th:text="${pageInfo.pages}"></span>页，共<span th:text="${pageInfo.total}"></span>条记录</p>
+                                </div>
+                            </div>
+                            <div class="right aligned column">
+                                <div class="ui right floated pagination menu" th:if="${pageInfo.pages>1}">
+                                    <div class="item"><a th:href="@{/}">首页</a></div>
+                                    <div class="item"><a th:href="@{/(pagenum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></div>
+                                    <div class="item"><a th:href="@{/(pagenum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></div>
+                                    <div class="item"><a th:href="@{/(pagenum=${pageInfo.pages})}">尾页</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------右边分类标签---------->
+                <div class="five wide column">
+                    <!--分类-->
+                    <div class="ui segments">
+                        <div class="ui secondary segment">
+                            <div class="ui two column grid">
+                                <div class="column"><i class="idea icon"></i><span>分类</span></div>
+                                <div class="right aligned column">
+                                    <a href="#" th:href="@{types/-1}" target="_blank">更多</a><i class="angle double right icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segment">
+                            <div class="ui fluid vertical menu">
+                                <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item" th:each="type : ${types}" >
+                                    <span th:text="${type.name}">学习日志</span>
+                                    <div class="ui blue basic left pointing label" th:text="${#arrays.length(type.blogs)}">13</div>
+                                </a>
+                                <!--/*-->
+                                <a href="#" class="item">
+                                    思考与感悟
+                                    <div class="ui blue basic left pointing label">13</div>
+                                </a>
+                                <!--*/-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--标签-->
+                    <div class="ui segments m-margin-top-large">
+                        <div class="ui secondary segment">
+                            <div class="ui two column grid">
+                                <div class="column"><i class="tags icon"></i><span>标签</span></div>
+                                <div class="right aligned column">
+                                    <a href="#" th:href="@{tags/-1}" target="_blank">更多</a><i class="angle double right icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segment">
+                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" th:each="tag : ${tags}"  class="ui blue basic left pointing label m-margin-tb-tiny" >
+                                <span th:text="${tag.name}">方法论</span> <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
+                            </a>
+                            <!--/*-->
+                            <a href="#"  class="ui blue basic left pointing label m-margin-tb-tiny">
+                                方法论 <div class="detail">23</div>
+                            </a>
+                            <!--*/-->
+                        </div>
+                    </div>
+                    <!--最新推荐-->
+                    <div class="ui segments m-margin-top-large">
+                        <div class="ui secondary segment">
+                            <i class="bookmark icon"></i><span>最新推荐</span>
+                        </div>
+                        <div class="ui segment" th:each="recommendBlog : ${recommendBlogs}">
+                            <a href="#" th:href="@{/blog/{id}(id=${recommendBlog.id})}" th:text="${recommendBlog.title}" class="m-black m-text-thin" >用户故事（User Story）</a>
+                        </div>
+                        <!--/*-->
+                        <div class="ui blue segment" >
+                            <a href="#"  class="m-black m-text-thin">用户故事（User Story）</a>
+                        </div>
+                        <!--*/-->
+                    </div>
+                    <!--二维码-->
+                    <h3 class="ui horizontal divider header m-margin-top-large"><span style="color: whitesmoke">扫码加好友</span></h3>
+                    <div class="ui centered card" style="width: 11em">
+                        <img src="../static/imgs/wechatQR.png" th:src="@{/imgs/wechatQR.png}" alt="" class="ui rounded image">
+                    </div><br>
+                    <!-- 为博客添加音乐组件 -->
+                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=300 src="//music.163.com/outchain/player?type=0&id=6617271490&auto=1&height=100"></iframe>
+                </div>
+            </div>
+        </div>
+    </div><br><br>
+    <!--底部-->
+    <footer th:replace="common/_fragments::common_footer"></footer>
+
+    <script>
+        $('.menu.toggle').click(function (){
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+    </script>
+
+    <!--/*/<th:block th:replace="common/_fragments::common_srcipt">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!--/*/</th:block>/*/-->
+
+    <!--引入看板娘-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+
+    <!--引入 彩带背景 的js-->
+    <!--/*/<th:block th:replace="common/_fragments::ribbon_background">/*/-->
+    <!--/*/</th:block>/*/-->
+
+    <!--引入 离开网站时的小提示 的js-->
+    <!--/*/<th:block th:replace="common/_fragments::hint_text">/*/-->
+    <!--/*/</th:block>/*/-->
+
+    <!--引入 鼠标点击特效 的js-->
+    <!--/*/<th:block th:replace="common/_fragments::mouse_onclick">/*/-->
+    <!--/*/</th:block>/*/-->
+
+    <script>
+        // 运行时间统计
+        function secondToDate(second) {
+            if (!second) {
+                return 0;
+            }
+            var time = new Array(0, 0, 0, 0, 0);
+            if (second >= 365 * 24 * 3600) {
+                time[0] = parseInt(second / (365 * 24 * 3600));
+                second %= 365 * 24 * 3600;
+            }
+            if (second >= 24 * 3600) {
+                time[1] = parseInt(second / (24 * 3600));
+                second %= 24 * 3600;
+            }
+            if (second >= 3600) {
+                time[2] = parseInt(second / 3600);
+                second %= 3600;
+            }
+            if (second >= 60) {
+                time[3] = parseInt(second / 60);
+                second %= 60;
+            }
+            if (second > 0) {
+                time[4] = second;
+            }
+            return time;
+        }
+        function setTime() {
+            /*此处为网站的创建时间*/
+            var create_time = Math.round(new Date(Date.UTC(2021, 03, 15, 15, 15, 15)).getTime() / 1000);
+            var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+            currentTime = secondToDate((timestamp - create_time));
+            currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+                + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+                + '秒';
+            document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+        }
+        setInterval(setTime, 1000);
+    </script>
+</body>
+</html>

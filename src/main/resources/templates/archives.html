@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/_fragments::common_head(~{::title})">
+    <title>归档</title>
+</head>
+<body>
+    <!--导航-->
+    <nav th:replace="common/_fragments::common_nav('归档')"></nav>
+
+    <!--中间内容-->
+    <div class="m-container-small m-padded-tb-big">
+        <div class="ui container">
+            <!--header-->
+            <div class="ui top attached padded segment">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <h2 class="ui teal header">归档</h2>
+                    </div>
+                    <div class="right aligned column">
+                        共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogCount}">14</h2>篇
+                    </div>
+                </div>
+            </div>
+
+            <th:block th:each="item : ${archiveMap}">
+                <h2 class="ui center aligned header" th:text="${item.key}" style="color: whitesmoke">2017</h2>
+                <div class="ui fluid vertical menu">
+                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
+                        <!--<i class="mini orange circle icon"></i>-->
+                        <span th:text="${blog.title}">关于刻意练习的清单</span>
+                        <div class="ui teal basic label m-padded-mini " th:text="${blog.flag}">原创</div>
+                        <div class="ui blue basic label m-padded-mini " th:text="${#dates.format(blog.updateTime,'MMMdd')}">9月03</div>
+                    </a>
+                </div>
+            </th:block>
+        </div>
+    </div><br><br>
+
+    <!--底部-->
+    <footer th:replace="common/_fragments::common_footer"></footer>
+
+    <!--/*/<th:block th:replace="common/_fragments::common_srcipt">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!--/*/</th:block>/*/-->
+
+    <!--引入 彩带背景 的js-->
+    <!--/*/<th:block th:replace="common/_fragments::ribbon_background">/*/-->
+    <!--/*/</th:block>/*/-->
+
+    <!--引入 鼠标点击特效 的js-->
+    <!--/*/<th:block th:replace="common/_fragments::mouse_onclick">/*/-->
+    <!--/*/</th:block>/*/-->
+
+    <script>
+        $('.menu.toggle').click(function (){
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+    </script>
+</body>
+</html>
