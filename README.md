@@ -6,26 +6,32 @@
 
 项目参照了李仁密老师的基于springboot的小而美的个人博客，朱一鸣的个人博客项目，博客地址：http://www.zhuyiming.top。
 
-**把持久层修改为了mybatis**，可以作为刚学完springboot的练习项目。
-
 目录中有blog.sql文件，可以直接执行生成对应的数据库和表 
 
 功能：**前端展示 + 后台管理**
 
 博客地址：**暂无**
 
-**技术组合：**
+**技术栈：**
 
-*  后端：Spring Boot + mybatis 
+*  前端：
+   - JS框架：JQuery
+   - CSS框架：[Semantic UI官网](https://semantic-ui.com/)
+   - Markdown编辑器：[编辑器 Markdown](https://pandao.github.io/editor.md/)
+   - 代码高亮：[代码高亮 prism](https://github.com/PrismJS/prism)
+   - 动画效果：[动画 animate.css](https://daneden.github.io/animate.css/)
+   - 目录生成：[目录生成 Tocbot](https://tscanlin.github.io/tocbot/)
+   - 二维码生成：[二维码生成](https://davidshimjs.github.io/qrcodejs/)
+   - 平滑滚动:  [平滑滚动](https://github.com/flesler/jquery.scrollTo)
+   - 滚动侦测: [滚动侦测](http://imakewebthings.com/waypoints/)
+*  后端：
+   - 核心框架：SpringBoot 2.4.4
+   - 项目构建：jdk1.8、Maven 3.6.3
+   - 持久层框架：Mybatis
+   - 模板框架：Thymeleaf
+   - 分页插件：PageHelper
+   - 加密：BCryptPasswordEncoder加密
 *  数据库：MySQL8.0
-*  前端：Semantic UI框架 + thymeleaf模板
-
-**工具与环境：**
-
-*  IDEA 2020.1.3
-*  Maven 3.6.3
-*  JDK 8
-*  springboot 2.4.4
 
 **博客展示界面**
 
