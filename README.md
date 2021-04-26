@@ -4,7 +4,8 @@
 >
 > **qq： 1548963912**
 
-项目参照了李仁密老师的基于springboot的小而美的个人博客，朱一鸣的个人博客项目，博客地址：http://www.zhuyiming.top。
+项目参照了李仁密老师的基于springboot的小而美的个人博客，
+         朱一鸣的个人博客项目博客地址：http://www.zhuyiming.top
 
 目录中有blog.sql文件，可以直接执行生成对应的数据库和表 
 
