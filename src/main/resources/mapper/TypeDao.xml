@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhb.blogs.dao.TypeDao">
+    <insert id="saveType" parameterType="Type">
+        insert into blog.t_type values(#{id},#{name});
+    </insert>
+    <select id="getTypeById" resultType="Type">
+        select id,name from blog.t_type where id = #{id};
+    </select>
+    <select id="getTypeByName" resultType="Type">
+        select * from blog.t_type where name = #{name};
+    </select>
+    <select id="getAllType" resultType="Type">
+        select * from blog.t_type
+    </select>
+
+    <resultMap id="mytype" type="Type">
+        <id column="tid" property="id"/>
+        <result column="name" property="name"/>
+        <collection property="blogs" ofType="Blog">
+            <id column="bid" property="id"/>
+            <result column="title" property="title"/>
+            <result column="type_id" property="typeId"/>
+        </collection>
+    </resultMap>
+    <select id="getBlogType" resultMap="mytype">
+        select t.id tid, t.name, b.id bid, b.title, b.type_id
+        from t_type t, t_blog b
+        where t.id = b.type_id
+    </select>
+
+
+    <update id="updateType" parameterType="Type">
+        update blog.t_type set name = #{name} where id = #{id};
+    </update>
+    <delete id="deleteType">
+        delete from blog.t_type where id = #{id};
+    </delete>
+</mapper>

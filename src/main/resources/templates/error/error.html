@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/_fragments::common_head(~{::title})">
+    <title>error</title>
+</head>
+<body>
+    <!--导航-->
+    <nav th:replace="common/_fragments::common_nav('404')"></nav>
+
+    <br><br><br><br>
+    <div class="m-container-small m-padded-tb-massive">
+        <div class="ui error message m-padded-tb-massive">
+            <div class="ui contianer">
+                <h2>error</h2>
+                <p>请联系管理员解决</p>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+
+    <!--底部-->
+    <footer th:replace="common/_fragments::common_footer"></footer>
+</body>
+</html>
