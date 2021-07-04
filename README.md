@@ -21,6 +21,8 @@ blog version1.1 未完成回复功能，功能模块中的分类和标签有bug�
 （下载semantic源码并修改后，用gulp来编译，如果有大佬成功了，请发我一份，谢谢！）。
 
 暑假决定重构博客。
+
+已经改用hexo了，一天就搞定了，详情请点击[我的hexo博客](https://github.com/pigwantacat/pigwantacat.github.io)
 */
 ```
 
